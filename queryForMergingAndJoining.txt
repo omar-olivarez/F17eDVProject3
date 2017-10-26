@@ -1,0 +1,82 @@
+select * from (select *
+from cleanedinternetusagebystate join stateabbr 
+on cleanedinternetusagebystate.state = stateabbr.stateabbr.statename) a 
+
+left outer join (select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from tx
+union 
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ca
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ak
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from al
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ar
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from az
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from co
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ct
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from dc
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from fl
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from de
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ga
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from hi
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ia
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ia
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ks
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ky
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from la 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from me 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from md 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ma 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from mi 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from mn 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ms 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from mo 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from mt 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ne 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from nv 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from nh 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from nj 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from nm 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ny 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from nc 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from nd
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from oh 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ok 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from pa 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from ri 
+union
+select summarylevel, state, statefips, geoid, areaname, b23001_001, b23001_002, b23001_003, b23001_004, b23001_005, b23001_006, b23001_007, b23001_008, b23001_009, b23001_010, b23001_011 from sc ) b 
+on a.abbr = b.state 
