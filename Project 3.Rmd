@@ -22,15 +22,20 @@ knitr::opts_chunk$set(echo = TRUE)
 ## **Github Link** 
 [Team 3 github](https://github.com/omar-olivarez/F17eDVProject3)
 
-## Internet Usage and Census Data
+## **Introduction** 
 
 The following analyses will observe trends in internet usage across the United State while also taking advantage of US Census Data.
 
-```{r cars}
-summary(cars)
+## **Description of the dataset:** 
+The Internet usage dataset contains...
+
+```{r}
+project <- "https://data.world/kassandra-perez/internet-usage"
+data.world::set_config(cfg_env("DW_API"))
+df <- data.world::query(data.world::qry_sql("SELECT * FROM internet-usage"), dataset = project)
 ```
 
-## Including Plots
+## Scatter plot of internet usage at home against internet usage at work
 
 You can also embed plots, for example:
 
