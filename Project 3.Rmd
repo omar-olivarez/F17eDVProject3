@@ -28,6 +28,7 @@ The following analyses will observe trends in internet usage across the United S
 
 ## **Description of the dataset:** 
 This data describes Internet Usage and Connectivity across the United States from July 2015 to October 2016. The columns that we used were a combination of the census population data,income data, internet usage and connectivity data.
+[Original Dataset](http://www.governing.com/gov-data/internet-usage-by-state.html)
 
 ```{r}
 project <- "https://data.world/kassandra-perez/internet-usage"
