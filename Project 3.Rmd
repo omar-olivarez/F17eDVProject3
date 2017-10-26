@@ -1,6 +1,5 @@
 ---
 title: "Project 3"
-output: html_document
 resource_files:
 - .Renviron
 output:
