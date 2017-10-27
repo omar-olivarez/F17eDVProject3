@@ -282,7 +282,8 @@ div.tocify {
 </div>
 <div id="section-description-of-the-dataset" class="section level2">
 <h2><strong>Description of the dataset:</strong></h2>
-<p>This data describes Internet Usage and Connectivity across the United States from July 2015 to October 2016. The columns that we used were a combination of the census population data,income data, internet usage and connectivity data. <a href="http://www.governing.com/gov-data/internet-usage-by-state.html">Original Dataset</a></p>
+<p>This data describes Internet Usage and Connectivity across the United States from July 2015 to October 2016. The columns that we used were a combination of the census population data,income data, internet usage and connectivity data.</p>
+<p><a href="http://www.governing.com/gov-data/internet-usage-by-state.html">Original Dataset</a></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJvamVjdCA8LSBcImh0dHBzOi8vZGF0YS53b3JsZC9rYXNzYW5kcmEtcGVyZXovaW50ZXJuZXQtdXNhZ2VcIlxuZGF0YS53b3JsZDo6c2V0X2NvbmZpZyhjZmdfZW52KFwiRFdfQVBJXCIpKVxuZGYgPC0gZGF0YS53b3JsZDo6cXVlcnkoZGF0YS53b3JsZDo6cXJ5X3NxbChcIlNFTEVDVCAqIEZST00gY2xlYW5lZGludGVybmV0dXNhZ2VieXN0YXRlXCIpLCBkYXRhc2V0ID0gcHJvamVjdClcbmBgYCJ9 -->
@@ -293,12 +294,51 @@ df &lt;- data.world::query(data.world::qry_sql(&quot;SELECT * FROM cleanedintern
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
+<div id="section-internet-usage-within-different-states" class="section level2">
+<h2>Internet Usage within different states</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVuZGVyUGxvdCh7XG4gIGdncGxvdChkZikgKyBnZW9tX2JhcihtYXBwaW5nID0gYWVzKHggPSBpbnRlcm5ldHVzYWdlLCB5ID0gU3RhdGUpKVxufSlcblxuYGBgIn0= -->
+<pre class="r"><code>renderPlot({
+  ggplot(df) + geom_bar(mapping = aes(x = internetusage, y = State))
+})
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
 <div id="section-scatter-plot-of-internet-usage-at-home-against-internet-usage-at-work" class="section level2">
 <h2>Scatter plot of internet usage at home against internet usage at work</h2>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5yZW5kZXJQbG90KHtcbiAgZ2dwbG90KGRmKSArIGdlb21fcG9pbnQobWFwcGluZyA9IGFlcyAoeD1pbnRlcm5ldHVzYWdlYXRob21lLHk9aW50ZXJuZXR1c2FnZWF0d29yaykpXG59KVxuXG5gYGAifQ== -->
+<pre class="r"><code>
+renderPlot({
+  ggplot(df) + geom_point(mapping = aes (x=internetusageathome,y=internetusageatwork))
+})
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="section-boxplot" class="section level2">
+<h2>Boxplot</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVuZGVyUGxvdCh7XG4gIGdncGxvdChkZixtYXBwaW5nID0gYWVzKHggPSBwZXJjYXBpdGFpbmNvbWUseSA9IGludGVybmV0dXNhZ2VhdHdvcmtsZXZlbCkpICtcbiAgICBnZW9tX2JveHBsb3QoKSArIFxuICAgIGNvb3JkX2ZsaXAoKVxufSlcblxuYGBgIn0= -->
+<pre class="r"><code>renderPlot({
+  ggplot(df,mapping = aes(x = percapitaincome,y = internetusageatworklevel)) +
+    geom_boxplot() + 
+    coord_flip()
+})
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlByb2plY3QgMyINCnJlc291cmNlX2ZpbGVzOg0KLSAuUmVudmlyb24NCm91dHB1dDoNCiAgaHRtbF9ub3RlYm9vazoNCiAgICBjb2RlX2ZvbGRpbmc6IGhpZGUNCiAgICB0b2M6IHllcw0KICAgIHRvY19kZXB0aDogNA0KICAgIHRvY19mbG9hdDogeWVzDQpydW50aW1lOiBzaGlueQ0KLS0tDQoNCg0KYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9DQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmxpYnJhcnkoZGF0YS53b3JsZCkNCmxpYnJhcnkoc2hpbnkpDQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpgYGANCg0KIyMgKipHaXRodWIgTGluayoqIA0KW1RlYW0gMyBnaXRodWJdKGh0dHBzOi8vZ2l0aHViLmNvbS9vbWFyLW9saXZhcmV6L0YxN2VEVlByb2plY3QzKQ0KDQojIyAqKkludHJvZHVjdGlvbioqIA0KDQpUaGUgZm9sbG93aW5nIGFuYWx5c2VzIHdpbGwgb2JzZXJ2ZSB0cmVuZHMgaW4gaW50ZXJuZXQgdXNhZ2UgYWNyb3NzIHRoZSBVbml0ZWQgU3RhdGUgd2hpbGUgYWxzbyB0YWtpbmcgYWR2YW50YWdlIG9mIFVTIENlbnN1cyBEYXRhLg0KDQojIyAqKkRlc2NyaXB0aW9uIG9mIHRoZSBkYXRhc2V0OioqIA0KVGhpcyBkYXRhIGRlc2NyaWJlcyBJbnRlcm5ldCBVc2FnZSBhbmQgQ29ubmVjdGl2aXR5IGFjcm9zcyB0aGUgVW5pdGVkIFN0YXRlcyBmcm9tIEp1bHkgMjAxNSB0byBPY3RvYmVyIDIwMTYuIFRoZSBjb2x1bW5zIHRoYXQgd2UgdXNlZCB3ZXJlIGEgY29tYmluYXRpb24gb2YgdGhlIGNlbnN1cyBwb3B1bGF0aW9uIGRhdGEsaW5jb21lIGRhdGEsIGludGVybmV0IHVzYWdlIGFuZCBjb25uZWN0aXZpdHkgZGF0YS4NCltPcmlnaW5hbCBEYXRhc2V0XShodHRwOi8vd3d3LmdvdmVybmluZy5jb20vZ292LWRhdGEvaW50ZXJuZXQtdXNhZ2UtYnktc3RhdGUuaHRtbCkNCg0KYGBge3J9DQpwcm9qZWN0IDwtICJodHRwczovL2RhdGEud29ybGQva2Fzc2FuZHJhLXBlcmV6L2ludGVybmV0LXVzYWdlIg0KZGF0YS53b3JsZDo6c2V0X2NvbmZpZyhjZmdfZW52KCJEV19BUEkiKSkNCmRmIDwtIGRhdGEud29ybGQ6OnF1ZXJ5KGRhdGEud29ybGQ6OnFyeV9zcWwoIlNFTEVDVCAqIEZST00gY2xlYW5lZGludGVybmV0dXNhZ2VieXN0YXRlIiksIGRhdGFzZXQgPSBwcm9qZWN0KQ0KYGBgDQoNCiMjIFNjYXR0ZXIgcGxvdCBvZiBpbnRlcm5ldCB1c2FnZSBhdCBob21lIGFnYWluc3QgaW50ZXJuZXQgdXNhZ2UgYXQgd29yaw0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlByb2plY3QgMyINCnJlc291cmNlX2ZpbGVzOg0KLSAuUmVudmlyb24NCm91dHB1dDoNCiAgaHRtbF9ub3RlYm9vazoNCiAgICBjb2RlX2ZvbGRpbmc6IGhpZGUNCiAgICB0b2M6IHllcw0KICAgIHRvY19kZXB0aDogNA0KICAgIHRvY19mbG9hdDogeWVzDQpydW50aW1lOiBzaGlueQ0KLS0tDQoNCg0KYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9DQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmxpYnJhcnkoZGF0YS53b3JsZCkNCmxpYnJhcnkoc2hpbnkpDQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpgYGANCg0KIyMgKipHaXRodWIgTGluayoqIA0KW1RlYW0gMyBnaXRodWJdKGh0dHBzOi8vZ2l0aHViLmNvbS9vbWFyLW9saXZhcmV6L0YxN2VEVlByb2plY3QzKQ0KDQojIyAqKkludHJvZHVjdGlvbioqIA0KDQpUaGUgZm9sbG93aW5nIGFuYWx5c2VzIHdpbGwgb2JzZXJ2ZSB0cmVuZHMgaW4gaW50ZXJuZXQgdXNhZ2UgYWNyb3NzIHRoZSBVbml0ZWQgU3RhdGUgd2hpbGUgYWxzbyB0YWtpbmcgYWR2YW50YWdlIG9mIFVTIENlbnN1cyBEYXRhLg0KDQojIyAqKkRlc2NyaXB0aW9uIG9mIHRoZSBkYXRhc2V0OioqIA0KVGhpcyBkYXRhIGRlc2NyaWJlcyBJbnRlcm5ldCBVc2FnZSBhbmQgQ29ubmVjdGl2aXR5IGFjcm9zcyB0aGUgVW5pdGVkIFN0YXRlcyBmcm9tIEp1bHkgMjAxNSB0byBPY3RvYmVyIDIwMTYuIFRoZSBjb2x1bW5zIHRoYXQgd2UgdXNlZCB3ZXJlIGEgY29tYmluYXRpb24gb2YgdGhlIGNlbnN1cyBwb3B1bGF0aW9uIGRhdGEsaW5jb21lIGRhdGEsIGludGVybmV0IHVzYWdlIGFuZCBjb25uZWN0aXZpdHkgZGF0YS4NCg0KW09yaWdpbmFsIERhdGFzZXRdKGh0dHA6Ly93d3cuZ292ZXJuaW5nLmNvbS9nb3YtZGF0YS9pbnRlcm5ldC11c2FnZS1ieS1zdGF0ZS5odG1sKQ0KDQpgYGB7cn0NCnByb2plY3QgPC0gImh0dHBzOi8vZGF0YS53b3JsZC9rYXNzYW5kcmEtcGVyZXovaW50ZXJuZXQtdXNhZ2UiDQpkYXRhLndvcmxkOjpzZXRfY29uZmlnKGNmZ19lbnYoIkRXX0FQSSIpKQ0KZGYgPC0gZGF0YS53b3JsZDo6cXVlcnkoZGF0YS53b3JsZDo6cXJ5X3NxbCgiU0VMRUNUICogRlJPTSBjbGVhbmVkaW50ZXJuZXR1c2FnZWJ5c3RhdGUiKSwgZGF0YXNldCA9IHByb2plY3QpDQpgYGANCg0KIyMgSW50ZXJuZXQgVXNhZ2Ugd2l0aGluIGRpZmZlcmVudCBzdGF0ZXMNCg0KYGBge3J9DQpyZW5kZXJQbG90KHsNCiAgZ2dwbG90KGRmKSArIGdlb21fYmFyKG1hcHBpbmcgPSBhZXMoeCA9IGludGVybmV0dXNhZ2UsIHkgPSBTdGF0ZSkpDQp9KQ0KDQpgYGANCg0KIyMgU2NhdHRlciBwbG90IG9mIGludGVybmV0IHVzYWdlIGF0IGhvbWUgYWdhaW5zdCBpbnRlcm5ldCB1c2FnZSBhdCB3b3JrDQoNCmBgYHtyfQ0KDQpyZW5kZXJQbG90KHsNCiAgZ2dwbG90KGRmKSArIGdlb21fcG9pbnQobWFwcGluZyA9IGFlcyAoeD1pbnRlcm5ldHVzYWdlYXRob21lLHk9aW50ZXJuZXR1c2FnZWF0d29yaykpDQp9KQ0KDQpgYGANCg0KDQojIyBCb3hwbG90IA0KDQpgYGB7cn0NCnJlbmRlclBsb3Qoew0KICBnZ3Bsb3QoZGYsbWFwcGluZyA9IGFlcyh4ID0gcGVyY2FwaXRhaW5jb21lLHkgPSBpbnRlcm5ldHVzYWdlYXR3b3JrbGV2ZWwpKSArDQogICAgZ2VvbV9ib3hwbG90KCkgKyANCiAgICBjb29yZF9mbGlwKCkNCn0pDQoNCmBgYA0KDQo=</div>
 
 
 </div>

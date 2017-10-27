@@ -28,13 +28,57 @@ The following analyses will observe trends in internet usage across the United S
 
 ## **Description of the dataset:** 
 This data describes Internet Usage and Connectivity across the United States from July 2015 to October 2016. The columns that we used were a combination of the census population data,income data, internet usage and connectivity data.
+
 [Original Dataset](http://www.governing.com/gov-data/internet-usage-by-state.html)
 
 ```{r}
 project <- "https://data.world/kassandra-perez/internet-usage"
 data.world::set_config(cfg_env("DW_API"))
 df <- data.world::query(data.world::qry_sql("SELECT * FROM cleanedinternetusagebystate"), dataset = project)
+
+states = df %>% dplyr::distinct(state)
+```
+
+## Internet Usage within different states
+
+```{r}
+renderPlot({
+  ggplot(df) + geom_col(mapping = aes(x = state , y = internetusage)) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+})
+
+```
+
+```{r}
+
+inputPanel(
+  selectInput("selectState", label = "State:",
+              choices = states, multiple=FALSE, selected="Texas")
+)
+
+renderPlot({
+  df %>% dplyr::filter(state == input$selectState) %>%ggplot() + geom_col(mapping = aes(x = state, y = internetusage))
+})
+
 ```
 
 ## Scatter plot of internet usage at home against internet usage at work
+
+```{r}
+
+renderPlot({
+  ggplot(df) + geom_point(mapping = aes (x=internetusageathome,y=internetusageatwork))
+})
+
+```
+
+
+## Boxplot 
+
+```{r}
+renderPlot({
+  ggplot(df,mapping = aes(x = percapitaincome,y = internetusageatwork,fill =internetusageatworklevel)) +
+    geom_boxplot() 
+})
+
+```
 
