@@ -35,8 +35,10 @@ This data describes Internet Usage and Connectivity across the United States fro
 project <- "https://data.world/kassandra-perez/internet-usage"
 data.world::set_config(cfg_env("DW_API"))
 df <- data.world::query(data.world::qry_sql("SELECT * FROM cleanedinternetusagebystate"), dataset = project)
+abbr = data.world::query(data.world::qry_sql("SELECT * FROM stateabbr"), dataset = project)
 
 states = df %>% dplyr::distinct(state)
+under20k = df %>% dplyr::filter(percapitaincome < 20000) %>% dplyr::left_join(abbr, by = c("state" = "statename"))
 ```
 
 ## Internet Usage within different states
@@ -71,6 +73,17 @@ renderPlot({
 
 ```
 
+## Scatter plot: Per capita income vs internet penetration
+This graph lets us see the relationship between per capita income and internet penetration.
+```{r}
+renderPlot({
+  ggplot(df) + geom_point(aes(x = internet_penetration, y = percapitaincome))
+})
+```
+
+We see that there is a positive relationship between income and internet penetration. Basically it tells us that the higher per capita income there is there will most likely be higher internet usage proportionate to the population. 
+
+Link to Tableau: https://data.world/kassandra-perez/f-17-edv-project-3/insights/fbd97c5c-5583-4497-b3c3-3e9a440b2e35
 
 ## Boxplot 
 
@@ -81,4 +94,29 @@ renderPlot({
 })
 
 ```
+
+This boxplot lets see the difference between internet usage depending on per capita income.
+```{r}
+renderPlot({
+  ggplot(df) + geom_boxplot(aes(x = internetusageatworklevel, y = percapitaincome))
+})
+```
+
+As we can see there is a gap in the data between low and medium levels of internet usage overall. We see that most of the data falls in the high level of internet usage which makes sense as higher capita income allows for more access to the internet, where ever it may be.
+
+Link to tableau: https://data.world/kassandra-perez/f-17-edv-project-3/insights/bdeb1f07-8337-42cc-985f-8724ac538efc
+
+## Barchart 
+This first graph lets us see connections elsewhere aside from the home from a few poor states (<20000K per capita income).
+
+```{r}
+renderPlot({
+  ggplot(under20k) + 
+    geom_col(aes(x = abbr, y = nohomeconnection_connectelsewhere, color = internetusagelevel))
+})
+```
+
+As we can see Alabama, Montana, Mississippi, New Mexico have the higher connections elsewhere aside from the home. Also from these four states, we see that Montana has a medium level of internet usage overall while the others have low level usage.
+
+Link to tableau graph: https://data.world/kassandra-perez/f-17-edv-project-3/insights/9ef4ee09-2c9e-42b1-a7c9-cd663d5b0e8b
 
