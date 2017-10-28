@@ -88,6 +88,8 @@ renderPlot({
 
 
 ## Facebook Users
+[Insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights?anchor=https%3A%2F%2Fmedia.data.world%2FvB011VwSQWe3P8wAjGvs_FB%2520Penetration.png&id=cd9940c0-de7e-4c62-886b-3cc94612fb9f&source=sb)
+
 ```{r}
 renderPlot({
   ggplot(df) + geom_col(mapping = aes(x = state,y = facebook_users_august_2010, fill = internetusagelevel)) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
