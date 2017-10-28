@@ -41,6 +41,8 @@ states = df %>% dplyr::distinct(state)
 
 ## Internet Usage within different states
 
+[Insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights?anchor=https%3A%2F%2Fmedia.data.world%2Fy1DGViqGQDOAP3D6sAFm_image.png&id=7408d8f8-1973-45c5-b62a-06bc68370c1d&source=sb)
+
 ```{r}
 renderPlot({
   ggplot(df) + geom_col(mapping = aes(x = state , y = internetusage)) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
@@ -56,7 +58,7 @@ inputPanel(
 )
 
 renderPlot({
-  df %>% dplyr::filter(state == input$selectState) %>%ggplot() + geom_col(mapping = aes(x = state, y = internetusage))
+  df %>% dplyr::filter(state == input$selectState) %>%ggplot() + geom_col(mapping = aes(x = state, y = internetusage,fill=internetusagelevel))
 })
 
 ```
@@ -74,11 +76,43 @@ renderPlot({
 
 ## Boxplot 
 
+[Insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights/bdeb1f07-8337-42cc-985f-8724ac538efc)
+
 ```{r}
 renderPlot({
-  ggplot(df,mapping = aes(x = percapitaincome,y = internetusageatwork,fill =internetusageatworklevel)) +
+  ggplot(df,mapping = aes(x = internetusageatworklevel,y = percapitaincome)) +
     geom_boxplot() 
 })
 
 ```
 
+
+## Facebook Users
+```{r}
+renderPlot({
+  ggplot(df) + geom_col(mapping = aes(x = state,y = facebook_users_august_2010, fill = internetusagelevel)) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+})
+
+```
+
+```{r}
+
+inputPanel(
+  selectInput("n_breaks", label = "Number of bins:",
+              choices = c(10, 20, 35, 50, 100), selected = 20)
+)
+
+renderPlot({
+  ggplot(df, mapping = aes(x = facebook_penetration,fill = youngcategories)) + geom_histogram(bins=input$n_breaks)
+})
+
+```
+
+```{r}
+renderPlot({
+  ggplot(df) + 
+    geom_col(mapping = aes(x = youngcategories, y = facebook_users_august_2010, fill = youngcategories)) +
+    facet_grid(.~internetusagelevel)
+})
+
+```
