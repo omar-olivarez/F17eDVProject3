@@ -29,21 +29,22 @@ The following analyses will observe trends in internet usage across the United S
 ## **Description of the dataset:** 
 This data describes Internet Usage and Connectivity across the United States from July 2015 to October 2016. The columns that we used were a combination of the census population data,income data, internet usage and connectivity data.
 
-The original dataset can be located at:
-[Original Dataset](http://www.governing.com/gov-data/internet-usage-by-state.html)
+[The original dataset can be located at](http://www.governing.com/gov-data/internet-usage-by-state.html)
 
 ```{r}
 project <- "https://data.world/kassandra-perez/internet-usage"
 data.world::set_config(cfg_env("DW_API"))
 df <- data.world::query(data.world::qry_sql("SELECT * FROM cleanedinternetusagebystate"), dataset = project)
+abbr = data.world::query(data.world::qry_sql("SELECT * FROM stateabbr"), dataset = project)
 
 states = df %>% dplyr::distinct(state)
+under20k = df %>% dplyr::filter(percapitaincome < 20000) %>% dplyr::left_join(abbr, by = c("state" = "statename"))
 ```
 
 ## Internet Usage within different states
 Below is a bar chart of internet usage for each state in the United States. The bar chart allows for comparisons between the states that make it very easy to identify outliers: the internet usage of California's residents is multiples higher than the average state's. Likewise, Wyoming's low internet usage is easily identified by the chart.
-To see this data directly in data.world, see the following Insight link:
-[Insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights?anchor=https%3A%2F%2Fmedia.data.world%2Fy1DGViqGQDOAP3D6sAFm_image.png&id=7408d8f8-1973-45c5-b62a-06bc68370c1d&source=sb)
+
+[See more at the data.world insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights?anchor=https%3A%2F%2Fmedia.data.world%2Fy1DGViqGQDOAP3D6sAFm_image.png&id=7408d8f8-1973-45c5-b62a-06bc68370c1d&source=sb)
 
 ```{r}
 renderPlot({
@@ -66,8 +67,11 @@ renderPlot({
 })
 
 ```
-## Scatter plot of internet usage at home against internet usage at work
+
+## Scatter plot 
+### *Internet usage at home against internet usage at work*
 The following scatter plot clearly demonstrates a positive linear relationship between internet usage at home against usage at work. We are able to glean that not only are internet users more likely to use the internet at work if they do so at home, and vice versa, but but that more users do so at lower usage levels as opposed to the two values above 1.0e+07 on the x axis.
+
 ```{r}
 
 renderPlot({
@@ -76,22 +80,49 @@ renderPlot({
 
 ```
 
+### *Per capita income vs internet penetration*
+This graph lets us see the relationship between per capita income and internet penetration.
+```{r}
+renderPlot({
+  ggplot(df) + geom_point(aes(x = internet_penetration, y = percapitaincome))
+})
+```
 
-## Boxplot of internet usage at work
+We see that there is a positive relationship between income and internet penetration. Basically it tells us that the higher per capita income there is there will most likely be higher internet usage proportionate to the population. 
+
+[See more at the data.world insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights/fbd97c5c-5583-4497-b3c3-3e9a440b2e35)
+
+## Boxplot Internet Usage at Work
 The following boxplot compare internet usage at work. All internet users with high internet usage use the internet at frequencies entirely above the median of those users with low internet usage levels. Not only that, but users with high internet usage have a higher dispersion than the other internet users. On a similar note, the difference between the internet usage levels of low and medium internet usage levels is less than that between high internet usage levels and either of the other levels. This demonstrates that when users do use the internet at work at high levels, they do so at much higher levels.
- See more at the data.world insight: [Insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights/bdeb1f07-8337-42cc-985f-8724ac538efc)
+
 
 ```{r}
 renderPlot({
-  ggplot(df,mapping = aes(x = internetusageatworklevel,y = percapitaincome)) +
-    geom_boxplot() 
+  ggplot(df) + geom_boxplot(aes(x = internetusageatworklevel, y = percapitaincome))
 })
-
 ```
 
+As we can see there is a gap in the data between low and medium levels of internet usage overall. We see that most of the data falls in the high level of internet usage which makes sense as higher capita income allows for more access to the internet, where ever it may be.
 
-## Facebook Users by state and usage level
-The bar chart below demonstrates Facebook usage by state, and uses color to distinguish between internet usage levels. Once again, the bar chart allows for very stark differences to be easily identified: Wyoming, a high internet usage state, proportionally has a much higher Facebook usage compared to other states. On a different note, states with lower Facebook usage tend to see users with low or medium internet usage more frequently than high internet users. Despite the face that using Facebook would imply a higher internet usage, quite the opposite is discovered in the data. See more at the data.world insight: [Insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights?anchor=https%3A%2F%2Fmedia.data.world%2FvB011VwSQWe3P8wAjGvs_FB%2520Penetration.png&id=cd9940c0-de7e-4c62-886b-3cc94612fb9f&source=sb)
+[See more at the data.world insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights/bdeb1f07-8337-42cc-985f-8724ac538efc)
+
+## Barchart 
+This first graph lets us see connections elsewhere aside from the home from a few poor states (<20000K per capita income).
+
+```{r}
+renderPlot({
+  ggplot(under20k) + 
+    geom_col(aes(x = abbr, y = nohomeconnection_connectelsewhere, color = internetusagelevel))
+})
+```
+
+As we can see Alabama, Montana, Mississippi, New Mexico have the higher connections elsewhere aside from the home. Also from these four states, we see that Montana has a medium level of internet usage overall while the others have low level usage.
+
+[See more at the data.world insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights/9ef4ee09-2c9e-42b1-a7c9-cd663d5b0e8b)
+
+## Facebook
+### *Users by state and usage level*
+The bar chart below demonstrates Facebook usage by state, and uses color to distinguish between internet usage levels. Once again, the bar chart allows for very stark differences to be easily identified: Wyoming, a high internet usage state, proportionally has a much higher Facebook usage compared to other states. On a different note, states with lower Facebook usage tend to see users with low or medium internet usage more frequently than high internet users. Despite the face that using Facebook would imply a higher internet usage, quite the opposite is discovered in the data. 
 
 ```{r}
 renderPlot({
@@ -99,7 +130,10 @@ renderPlot({
 })
 
 ```
-## Histogram of Facebook Penetration
+
+[See more at the data.world insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights?anchor=https%3A%2F%2Fmedia.data.world%2FvB011VwSQWe3P8wAjGvs_FB%2520Penetration.png&id=cd9940c0-de7e-4c62-886b-3cc94612fb9f&source=sb)
+
+### *Histogram of Facebook Penetration*
 The Histogram belows demonstrates count of Facebook penetration by state. It can be nothed that Facebook penetration is generally low, regardless of the level of young category (low, medium, high). This is excluding the values noted at higher levels of Facebook penetration, which are exclusively in the low young category. Use the Number of Bins dropdown to get a more granular picture of the data on Facebook penetration.
 ```{r}
 
@@ -113,7 +147,7 @@ renderPlot({
 })
 
 ```
-## Bar chart of youngcategories against proportion of Facebook users in 2010
+### *Bar chart of youngcategories against proportion of Facebook users in 2010*
 Below, one can distinguish that at the Medium young category, the proportion of Facebook users in August 2010 were multiples higher than the average users in other young categories. Excluding this exception, there is little variance between young categories. It is only within the High young category that a stark difference between young categories exist, with the highest and lowest columns occurring within the same facet.
 ```{r}
 renderPlot({
