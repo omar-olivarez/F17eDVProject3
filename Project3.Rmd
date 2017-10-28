@@ -20,15 +20,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## **Github Link** 
-[Team 3 github](https://github.com/omar-olivarez/F17eDVProject3)
+Team 3's Github link for this project can be found at: [Team 3 github](https://github.com/omar-olivarez/F17eDVProject3)
 
 ## **Introduction** 
 
-The following analyses will observe trends in internet usage across the United State while also taking advantage of US Census Data.
+The following analyses will observe trends in internet usage across the United State while also taking advantage of US Census Data. These analyses will be conducted by Team 3, composed of: Carlos Cruz, Omar Olivarez, and Kassandra Perez.
 
 ## **Description of the dataset:** 
 This data describes Internet Usage and Connectivity across the United States from July 2015 to October 2016. The columns that we used were a combination of the census population data,income data, internet usage and connectivity data.
 
+The original dataset can be located at:
 [Original Dataset](http://www.governing.com/gov-data/internet-usage-by-state.html)
 
 ```{r}
@@ -40,7 +41,8 @@ states = df %>% dplyr::distinct(state)
 ```
 
 ## Internet Usage within different states
-
+Below is a bar chart of internet usage for each state in the United States. The bar chart allows for comparisons between the states that make it very easy to identify outliers: the internet usage of California's residents is multiples higher than the average state's. Likewise, Wyoming's low internet usage is easily identified by the chart.
+To see this data directly in data.world, see the following Insight link:
 [Insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights?anchor=https%3A%2F%2Fmedia.data.world%2Fy1DGViqGQDOAP3D6sAFm_image.png&id=7408d8f8-1973-45c5-b62a-06bc68370c1d&source=sb)
 
 ```{r}
@@ -49,6 +51,8 @@ renderPlot({
 })
 
 ```
+
+Below, internet usage is depicted at the state level. Usage is categorized and labeled in the legend to the right of the graph (ex: California has Medium internet usage). The state dropdown allows readers to select one sole state to focus on internet usage levels.
 
 ```{r}
 
@@ -62,9 +66,8 @@ renderPlot({
 })
 
 ```
-
 ## Scatter plot of internet usage at home against internet usage at work
-
+The following scatter plot clearly demonstrates a positive linear relationship between internet usage at home against usage at work. We are able to glean that not only are internet users more likely to use the internet at work if they do so at home, and vice versa, but but that more users do so at lower usage levels as opposed to the two values above 1.0e+07 on the x axis.
 ```{r}
 
 renderPlot({
@@ -74,9 +77,9 @@ renderPlot({
 ```
 
 
-## Boxplot 
-
-[Insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights/bdeb1f07-8337-42cc-985f-8724ac538efc)
+## Boxplot of internet usage at work
+The following boxplot compare internet usage at work. All internet users with high internet usage use the internet at frequencies entirely above the median of those users with low internet usage levels. Not only that, but users with high internet usage have a higher dispersion than the other internet users. On a similar note, the difference between the internet usage levels of low and medium internet usage levels is less than that between high internet usage levels and either of the other levels. This demonstrates that when users do use the internet at work at high levels, they do so at much higher levels.
+ See more at the data.world insight: [Insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights/bdeb1f07-8337-42cc-985f-8724ac538efc)
 
 ```{r}
 renderPlot({
@@ -87,8 +90,8 @@ renderPlot({
 ```
 
 
-## Facebook Users
-[Insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights?anchor=https%3A%2F%2Fmedia.data.world%2FvB011VwSQWe3P8wAjGvs_FB%2520Penetration.png&id=cd9940c0-de7e-4c62-886b-3cc94612fb9f&source=sb)
+## Facebook Users by state and usage level
+The bar chart below demonstrates Facebook usage by state, and uses color to distinguish between internet usage levels. Once again, the bar chart allows for very stark differences to be easily identified: Wyoming, a high internet usage state, proportionally has a much higher Facebook usage compared to other states. On a different note, states with lower Facebook usage tend to see users with low or medium internet usage more frequently than high internet users. Despite the face that using Facebook would imply a higher internet usage, quite the opposite is discovered in the data. See more at the data.world insight: [Insight](https://data.world/kassandra-perez/f-17-edv-project-3/insights?anchor=https%3A%2F%2Fmedia.data.world%2FvB011VwSQWe3P8wAjGvs_FB%2520Penetration.png&id=cd9940c0-de7e-4c62-886b-3cc94612fb9f&source=sb)
 
 ```{r}
 renderPlot({
@@ -96,7 +99,8 @@ renderPlot({
 })
 
 ```
-
+## Histogram of Facebook Penetration
+The Histogram belows demonstrates count of Facebook penetration by state. It can be nothed that Facebook penetration is generally low, regardless of the level of young category (low, medium, high). This is excluding the values noted at higher levels of Facebook penetration, which are exclusively in the low young category. Use the Number of Bins dropdown to get a more granular picture of the data on Facebook penetration.
 ```{r}
 
 inputPanel(
@@ -109,7 +113,8 @@ renderPlot({
 })
 
 ```
-
+## Bar chart of youngcategories against proportion of Facebook users in 2010
+Below, one can distinguish that at the Medium young category, the proportion of Facebook users in August 2010 were multiples higher than the average users in other young categories. Excluding this exception, there is little variance between young categories. It is only within the High young category that a stark difference between young categories exist, with the highest and lowest columns occurring within the same facet.
 ```{r}
 renderPlot({
   ggplot(df) + 
